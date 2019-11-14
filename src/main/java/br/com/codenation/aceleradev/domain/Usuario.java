@@ -1,9 +1,10 @@
 package br.com.codenation.aceleradev.domain;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 

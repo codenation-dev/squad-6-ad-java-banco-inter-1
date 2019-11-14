@@ -1,7 +1,6 @@
 package br.com.codenation.aceleradev.domain;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
