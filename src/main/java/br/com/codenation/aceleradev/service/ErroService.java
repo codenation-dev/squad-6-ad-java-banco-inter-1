@@ -14,5 +14,4 @@ public interface ErroService {
     public Page<Erro> findByTitulo(Pageable pageable, String titulo);
     public Page<Erro> findByLevel(Pageable pageable, LevelEnum level);
     public Page<Erro> findByUsuarioId(Pageable pageable, Long usuarioId);
-
 }
