@@ -46,26 +46,13 @@ public class ErroController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Erro>> findAll(@PageableDefault(sort = "titulo", direction = Sort.Direction.DESC, page = 0,
-            size = 24) Pageable pageable) {
+    public ResponseEntity<Page<Erro>> findByTituloOrByLevelOrByUsuarioIdOrAll(@PageableDefault(sort = "titulo", direction = Sort.Direction.DESC, page = 0, size = 24) Pageable pageable,
+                                                                              @RequestParam(required = false) String titulo,
+                                                                              @RequestParam(required = false) LevelEnum level,
+                                                                              @RequestParam(required = false) Long usuarioId){
+        if (titulo != null) return ResponseEntity.ok(erroService.findByTitulo(pageable, titulo));
+        if (level != null) return ResponseEntity.ok(erroService.findByLevel(pageable, level));
+        if (usuarioId != null) return ResponseEntity.ok(erroService.findByUsuarioId(pageable, usuarioId));
         return ResponseEntity.ok(erroService.findAll(pageable));
-    }
-
-    @GetMapping
-    public ResponseEntity<Page<Erro>> findByTitulo(@PageableDefault(sort = "titulo", direction = Sort.Direction.DESC, page = 0,
-            size = 24) Pageable pageable, @RequestParam("titulo") String titulo) {
-        return ResponseEntity.ok(erroService.findByTitulo(pageable, titulo));
-    }
-
-    @GetMapping
-    public ResponseEntity<Page<Erro>> findByLevel(@PageableDefault(sort = "titulo", direction = Sort.Direction.DESC, page = 0,
-            size = 24) Pageable pageable, @RequestParam("level") LevelEnum level) {
-        return ResponseEntity.ok(erroService.findByLevel(pageable, level));
-    }
-
-    @GetMapping
-    public ResponseEntity<Page<Erro>> findByUsuarioId(@PageableDefault(sort = "titulo", direction = Sort.Direction.DESC, page = 0,
-            size = 24) Pageable pageable, @RequestParam("usuarioId") Long usuarioId) {
-        return ResponseEntity.ok(erroService.findByUsuarioId(pageable, usuarioId));
     }
 }

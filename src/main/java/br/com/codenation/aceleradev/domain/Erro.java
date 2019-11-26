@@ -29,7 +29,7 @@ public class Erro extends BaseEntity{
     private String detalhes;
 
     @ManyToOne
-    private Usuario usuarioLancamento;
+    private Usuario usuario;
 
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "level", nullable = false)
