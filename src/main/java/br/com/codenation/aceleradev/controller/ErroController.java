@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+
 @RestController
 @RequestMapping("/erro")
 public class ErroController {
@@ -22,6 +24,11 @@ public class ErroController {
     @Autowired
     public ErroController(ErroService erroService) {
         this.erroService = erroService;
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<Erro>> findAll(@PageableDefault(sort = "id", direction = Sort.Direction.ASC, page = 0, size = 24) Pageable pageable) {
+        return ResponseEntity.ok(erroService.findAll(pageable));
     }
 
     @GetMapping("/{id}")
@@ -46,24 +53,39 @@ public class ErroController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
-    public ResponseEntity<Page<Erro>> findByTituloOrByLevelOrByUsuarioIdOrAmbiente(@PageableDefault(sort = "titulo", direction = Sort.Direction.DESC, page = 0, size = 24) Pageable pageable,
-                                                                                   @RequestParam(required = false) AmbienteEnum ambiente,
-                                                                                   @RequestParam(required = false) String titulo,
-                                                                                   @RequestParam(required = false) LevelEnum level,
-                                                                                   @RequestParam(required = false) Long usuarioId) {
-        if (ambiente != null) {
-            if (titulo != null)
-                return ResponseEntity.ok(erroService.findByAmbienteAndTitulo(pageable, ambiente, titulo));
-            if (level != null) return ResponseEntity.ok(erroService.findByAmbienteAndLevel(pageable, ambiente, level));
-            if (usuarioId != null)
-                return ResponseEntity.ok(erroService.findByAmbienteAndUsuarioId(pageable, ambiente, usuarioId));
-            return ResponseEntity.ok(erroService.findByAmbiente(pageable, ambiente));
-        } else {
-            if (titulo != null) return ResponseEntity.ok(erroService.findByTitulo(pageable, titulo));
-            if (level != null) return ResponseEntity.ok(erroService.findByLevel(pageable, level));
-            if (usuarioId != null) return ResponseEntity.ok(erroService.findByUsuarioId(pageable, usuarioId));
-            return ResponseEntity.ok(erroService.findAll(pageable));
-        }
+    @GetMapping("/ambiente/{ambiente}")
+    public ResponseEntity<Page<Erro>> findByTituloOrByLevelOrByUsuarioIdOrByAmbiente(@PageableDefault(sort = "titulo", direction = Sort.Direction.ASC, page = 0, size = 24) Pageable pageable,
+                                                              @PathVariable AmbienteEnum ambiente,
+                                                              @RequestParam(required = false) String titulo,
+                                                              @RequestParam(required = false) LevelEnum level,
+                                                              @RequestParam(required = false) Long usuarioId) {
+        if (Objects.nonNull(titulo))
+            return ResponseEntity.ok(erroService.findByAmbienteAndTitulo(pageable, ambiente, titulo));
+        if(Objects.nonNull(level))
+            return ResponseEntity.ok(erroService.findByAmbienteAndLevel(pageable, ambiente, level));
+        if (Objects.nonNull(usuarioId))
+            return ResponseEntity.ok(erroService.findByAmbienteAndUsuarioId(pageable, ambiente, usuarioId));
+
+        return ResponseEntity.ok(erroService.findByAmbiente(pageable, ambiente));
     }
+
+    @GetMapping("/titulo/{titulo}")
+    public ResponseEntity<Page<Erro>> findByTitulo(@PageableDefault(sort = "titulo", direction = Sort.Direction.ASC, page = 0, size = 24) Pageable pageable,
+                                                   @PathVariable String titulo) {
+
+        return ResponseEntity.ok(erroService.findByTitulo(pageable, titulo));
+    }
+
+    @GetMapping("/level/{level}")
+    public ResponseEntity<Page<Erro>> findByLevel(@PageableDefault(sort = "titulo", direction = Sort.Direction.ASC, page = 0, size = 24) Pageable pageable,
+                                                  @PathVariable LevelEnum level) {
+        return ResponseEntity.ok(erroService.findByLevel(pageable, level));
+    }
+
+    @GetMapping("/usuarioId/{usuarioId}")
+    public ResponseEntity<Page<Erro>> findByUsuarioId(@PageableDefault(sort = "titulo", direction = Sort.Direction.ASC, page = 0, size = 24) Pageable pageable,
+                                                      @PathVariable Long usuarioId) {
+        return ResponseEntity.ok(erroService.findByUsuarioId(pageable, usuarioId));
+    }
+
 }
