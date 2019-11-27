@@ -1,5 +1,6 @@
 package br.com.codenation.aceleradev.service.impl;
 
+import br.com.codenation.aceleradev.comum.AmbienteEnum;
 import br.com.codenation.aceleradev.comum.LevelEnum;
 import br.com.codenation.aceleradev.domain.Erro;
 import br.com.codenation.aceleradev.exception.ResourceNotFoundException;
@@ -43,7 +44,7 @@ public class ErroServiceImpl implements ErroService {
     }
 
     @Override
-    public Page<Erro> findAll(Pageable pageable) {
+    public Page<Erro> findAll(Pageable pageable){
         return repository.findAll(pageable);
     }
 
@@ -60,5 +61,25 @@ public class ErroServiceImpl implements ErroService {
     @Override
     public Page<Erro> findByUsuarioId(Pageable pageable, Long usuarioId) {
         return repository.findByUsuarioId(pageable, usuarioId);
+    }
+
+    @Override
+    public Page<Erro> findByAmbiente(Pageable pageable, AmbienteEnum ambiente) {
+        return repository.findByAmbiente(pageable, ambiente);
+    }
+
+    @Override
+    public Page<Erro> findByAmbienteAndTitulo(Pageable pageable, AmbienteEnum ambiente, String titulo) {
+        return repository.findByAmbienteAndTitulo(pageable, ambiente, titulo);
+    }
+
+    @Override
+    public Page<Erro> findByAmbienteAndLevel(Pageable pageable, AmbienteEnum ambiente, LevelEnum level) {
+        return repository.findByAmbienteAndLevel(pageable, ambiente, level);
+    }
+
+    @Override
+    public Page<Erro> findByAmbienteAndUsuarioId(Pageable pageable, AmbienteEnum ambiente, Long usuarioId) {
+        return repository.findByAmbienteAndUsuarioId(pageable, ambiente, usuarioId);
     }
 }
