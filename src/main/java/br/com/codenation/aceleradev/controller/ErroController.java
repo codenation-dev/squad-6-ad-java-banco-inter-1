@@ -55,10 +55,10 @@ public class ErroController {
 
     @GetMapping("/ambiente/{ambiente}")
     public ResponseEntity<Page<Erro>> findByTituloOrByLevelOrByUsuarioIdOrByAmbiente(@PageableDefault(sort = "titulo", direction = Sort.Direction.ASC, page = 0, size = 24) Pageable pageable,
-                                                              @PathVariable AmbienteEnum ambiente,
-                                                              @RequestParam(required = false) String titulo,
-                                                              @RequestParam(required = false) LevelEnum level,
-                                                              @RequestParam(required = false) Long usuarioId) {
+                                                                                     @PathVariable AmbienteEnum ambiente,
+                                                                                     @RequestParam(required = false) String titulo,
+                                                                                     @RequestParam(required = false) LevelEnum level,
+                                                                                     @RequestParam(required = false) Long usuarioId) {
         if (Objects.nonNull(titulo))
             return ResponseEntity.ok(erroService.findByAmbienteAndTitulo(pageable, ambiente, titulo));
         if(Objects.nonNull(level))

@@ -5,25 +5,27 @@ import br.com.codenation.aceleradev.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
 
-    private static UsuarioService service;
+    private static UsuarioService usuarioService;
 
     @Autowired
-    public UsuarioController(UsuarioService service) {
-        this.service = service;
+    public UsuarioController(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Usuario> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(usuarioService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<Void> salvar(@RequestBody Usuario usuario){
-        service.salvar(usuario);
+    public ResponseEntity<Void> salvar(@RequestBody Usuario usuario) {
+        usuarioService.salvar(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
