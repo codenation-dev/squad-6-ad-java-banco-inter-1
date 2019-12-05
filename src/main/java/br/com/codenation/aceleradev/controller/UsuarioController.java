@@ -28,4 +28,10 @@ public class UsuarioController {
         usuarioService.salvar(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody Usuario usuario) {
+        usuarioService.update(id, usuario);
+        return ResponseEntity.noContent().build();
+    }
 }

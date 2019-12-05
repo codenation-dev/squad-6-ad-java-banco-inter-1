@@ -32,4 +32,10 @@ public class UsuarioServiceImpl implements UsuarioService {
         System.out.println(usuarioComSenhaEncriptografada.getSenha());
         usuarioRepository.save(usuarioComSenhaEncriptografada);
     }
+
+    @Override
+    public void update(Long id, Usuario usuario) {
+        usuarioRepository.save(usuario);
+    }
+
 }
