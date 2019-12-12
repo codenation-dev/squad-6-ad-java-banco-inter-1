@@ -2,6 +2,7 @@ package br.com.codenation.aceleradev.controller;
 
 import br.com.codenation.aceleradev.comum.AmbienteEnum;
 import br.com.codenation.aceleradev.comum.LevelEnum;
+import br.com.codenation.aceleradev.comum.StatusEnum;
 import br.com.codenation.aceleradev.domain.Erro;
 import br.com.codenation.aceleradev.service.ErroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -86,6 +88,16 @@ public class ErroController {
     public ResponseEntity<Page<Erro>> findByUsuarioId(@PageableDefault(sort = "titulo", direction = Sort.Direction.ASC, page = 0, size = 24) Pageable pageable,
                                                       @PathVariable Long usuarioId) {
         return ResponseEntity.ok(erroService.findByUsuarioId(pageable, usuarioId));
+    }
+
+    @PutMapping("/updateStatus/{statusCode}")
+    public ResponseEntity<Void> updateStatus(@RequestBody List<Long> listaIds, @PathVariable StatusEnum statusCode) {
+        for(Long id: listaIds){
+            Erro erro = erroService.findById(id);
+            erro.setStatus(statusCode);
+            erroService.update(id, erro);
+        }
+        return ResponseEntity.noContent().build();
     }
 
 }
