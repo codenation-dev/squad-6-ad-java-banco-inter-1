@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ErroServiceImpl implements ErroService {
 
-    private static ErroRepository repository;
+    private final ErroRepository repository;
 
     @Autowired
     public ErroServiceImpl(ErroRepository repository) {
@@ -79,5 +79,10 @@ public class ErroServiceImpl implements ErroService {
     @Override
     public Page<Erro> findByAmbienteAndUsuarioId(Pageable pageable, AmbienteEnum ambiente, Long usuarioId) {
         return repository.findByAmbienteAndUsuarioId(pageable, ambiente, usuarioId);
+    }
+
+    @Override
+    public Long countDistinctByAmbienteAndLevelAndTitulo(AmbienteEnum ambiente, LevelEnum level, String titulo) {
+        return repository.countDistinctByAmbienteAndLevelAndTitulo(ambiente, level, titulo).orElse(0L);
     }
 }
