@@ -23,9 +23,20 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.findById(id));
     }
 
+    @GetMapping("/email/{email}")
+    public ResponseEntity<Usuario> findByEmail(@PathVariable String email) {
+        return ResponseEntity.ok(usuarioService.findByEmail(email));
+    }
+
     @PostMapping
     public ResponseEntity<Void> salvar(@RequestBody Usuario usuario) {
         usuarioService.salvar(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody Usuario usuario) {
+        usuarioService.update(id, usuario);
+        return ResponseEntity.noContent().build();
     }
 }

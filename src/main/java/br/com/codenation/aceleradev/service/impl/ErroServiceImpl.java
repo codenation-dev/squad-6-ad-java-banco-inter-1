@@ -88,4 +88,9 @@ public class ErroServiceImpl implements ErroService {
         return new ErrorFilterTituloImpl().filtra(this, pageable, ambiente, erroFilter);
     }
 
+
+    @Override
+    public Long countDistinctByAmbienteAndLevelAndTitulo(AmbienteEnum ambiente, LevelEnum level, String titulo) {
+        return repository.countDistinctByAmbienteAndLevelAndTitulo(ambiente, level, titulo).orElse(0L);
+    }
 }

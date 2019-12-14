@@ -26,10 +26,21 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    public Usuario findByEmail(String email) {
+        return usuarioRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado"));
+    }
+
+    @Override
     public void salvar(Usuario usuario) {
         Usuario usuarioComSenhaEncriptografada = usuario;
         usuarioComSenhaEncriptografada.setSenha(passwordEncoder.encode(usuario.getSenha()));
         System.out.println(usuarioComSenhaEncriptografada.getSenha());
         usuarioRepository.save(usuarioComSenhaEncriptografada);
     }
+
+    @Override
+    public void update(Long id, Usuario usuario) {
+        usuarioRepository.save(usuario);
+    }
+
 }
