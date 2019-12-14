@@ -1,10 +1,11 @@
 package br.com.codenation.aceleradev.controller;
 
+import br.com.codenation.aceleradev.chain.ErroFilterChain;
 import br.com.codenation.aceleradev.comum.AmbienteEnum;
-import br.com.codenation.aceleradev.dto.ErroFilterDTO;
 import br.com.codenation.aceleradev.comum.LevelEnum;
 import br.com.codenation.aceleradev.comum.StatusEnum;
 import br.com.codenation.aceleradev.domain.Erro;
+import br.com.codenation.aceleradev.dto.ErroFilterDTO;
 import br.com.codenation.aceleradev.service.ErroService;
 import br.com.codenation.aceleradev.service.impl.ErroServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/erro")
@@ -63,12 +63,6 @@ public class ErroController {
                                                                                      ErroFilterDTO erroFilter) {
 
         return ResponseEntity.ok(erroService.findPaged(pageable, ambiente, erroFilter));
-
-//        return ResponseEntity.ok(titulo.map(erroService::findByAmbienteAndTitulo)
-//                .orElseGet(level.map(erroService::findByAmbienteAndLevel)
-//                        .orElseGet(usuarioId.map(erroService::findByAmbienteAndUsuarioId)
-//                                .orElseGet(erroService.findByAmbiente(pageable, ambiente)))));
-
     }
 
     @GetMapping("/titulo/{titulo}")
