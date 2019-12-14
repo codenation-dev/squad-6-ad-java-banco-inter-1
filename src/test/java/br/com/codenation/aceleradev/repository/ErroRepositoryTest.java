@@ -66,20 +66,7 @@ public class ErroRepositoryTest {
 
     @Test
     public void testFindAllErros(){
-        Erro erro2 = new Erro();
-        erro2.setStatus(StatusEnum.ATIVO);
-        erro2.setAmbiente(AmbienteEnum.DEV);
-        erro2.setLevel(LevelEnum.ERROR);
-        erro2.setData(LocalDateTime.now());
-        erro2.setEndereco("192.168.0.1");
-        erro2.setTitulo("Erro de teste 2");
-        erro2.setDetalhes("Detalhes de teste 2");
-        erro2.setUsuario(usuario);
-        erroRepository.save(erro2);
-
-
-
-        assertEquals(2, erroRepository.findAll().size());
+        assertEquals(7, erroRepository.count());
     }
 
     @After
