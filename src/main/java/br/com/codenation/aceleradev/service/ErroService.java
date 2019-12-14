@@ -1,6 +1,7 @@
 package br.com.codenation.aceleradev.service;
 
 import br.com.codenation.aceleradev.comum.AmbienteEnum;
+import br.com.codenation.aceleradev.dto.ErroFilterDTO;
 import br.com.codenation.aceleradev.comum.LevelEnum;
 import br.com.codenation.aceleradev.domain.Erro;
 import org.springframework.data.domain.Page;
@@ -20,4 +21,6 @@ public interface ErroService {
     Page<Erro> findByAmbienteAndLevel(Pageable pageable, AmbienteEnum ambiente, LevelEnum level);
     Page<Erro> findByAmbienteAndUsuarioId(Pageable pageable, AmbienteEnum ambiente, Long usuarioId);
     Long countDistinctByAmbienteAndLevelAndTitulo(AmbienteEnum ambiente, LevelEnum level, String titulo);
+
+    Page<Erro> findPaged(Pageable pageable, AmbienteEnum ambiente, ErroFilterDTO erroFilter);
 }

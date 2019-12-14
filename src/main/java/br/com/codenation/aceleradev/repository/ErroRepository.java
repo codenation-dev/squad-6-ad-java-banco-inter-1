@@ -6,9 +6,11 @@ import br.com.codenation.aceleradev.domain.Erro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Repository
 public interface ErroRepository extends JpaRepository<Erro, Long> {
     Page<Erro> findByTitulo(Pageable pageable, String titulo);
     Page<Erro> findByLevel(Pageable pageable, LevelEnum level);

@@ -7,11 +7,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Optional;
 
-public class UserDTO implements UserDetails {
+public class AuthenticationUserDTO implements UserDetails {
     private String login;
     private String senha;
 
-    public UserDTO(Optional<Usuario> user) {
+    public AuthenticationUserDTO(Optional<Usuario> user) {
         this.login = user.get().getEmail();
         this.senha = user.get().getSenha();
     }

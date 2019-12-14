@@ -1,6 +1,8 @@
 package br.com.codenation.aceleradev.service.impl;
 
+import br.com.codenation.aceleradev.chain.impl.ErrorFilterTituloImpl;
 import br.com.codenation.aceleradev.comum.AmbienteEnum;
+import br.com.codenation.aceleradev.dto.ErroFilterDTO;
 import br.com.codenation.aceleradev.comum.LevelEnum;
 import br.com.codenation.aceleradev.domain.Erro;
 import br.com.codenation.aceleradev.exception.ResourceNotFoundException;
@@ -80,6 +82,12 @@ public class ErroServiceImpl implements ErroService {
     public Page<Erro> findByAmbienteAndUsuarioId(Pageable pageable, AmbienteEnum ambiente, Long usuarioId) {
         return repository.findByAmbienteAndUsuarioId(pageable, ambiente, usuarioId);
     }
+
+    @Override
+    public Page<Erro> findPaged(Pageable pageable, AmbienteEnum ambiente, ErroFilterDTO erroFilter) {
+        return new ErrorFilterTituloImpl().filtra(this, pageable, ambiente, erroFilter);
+    }
+
 
     @Override
     public Long countDistinctByAmbienteAndLevelAndTitulo(AmbienteEnum ambiente, LevelEnum level, String titulo) {
