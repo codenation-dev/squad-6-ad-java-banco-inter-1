@@ -23,10 +23,10 @@ public class ErroFilterDTO {
     }
 
     public boolean isLevelNotNull() {
-        return !Objects.nonNull(this.level);
+        return !Objects.isNull(this.level);
     }
 
     public boolean isUsuarioIdNotNull() {
-        return !Objects.nonNull(this.usuarioId);
+        return !Objects.isNull(this.usuarioId);
     }
 }
