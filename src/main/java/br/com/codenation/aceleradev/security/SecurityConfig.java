@@ -1,8 +1,7 @@
 package br.com.codenation.aceleradev.security;
 
-import br.com.codenation.aceleradev.dto.UserDTO;
+import br.com.codenation.aceleradev.dto.AuthenticationUserDTO;
 import br.com.codenation.aceleradev.repository.UsuarioRepository;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,7 +10,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -34,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void authenticationManager(AuthenticationManagerBuilder builder, UsuarioRepository userRepository) throws Exception {
-        builder.userDetailsService(email -> new UserDTO(userRepository.findByEmail(email))).passwordEncoder(passwordEncoder());
+        builder.userDetailsService(email -> new AuthenticationUserDTO(userRepository.findByEmail(email))).passwordEncoder(passwordEncoder());
     }
 
     @Bean

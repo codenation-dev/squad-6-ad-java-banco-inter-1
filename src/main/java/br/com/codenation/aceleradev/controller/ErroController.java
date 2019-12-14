@@ -1,9 +1,12 @@
 package br.com.codenation.aceleradev.controller;
 
+import br.com.codenation.aceleradev.chain.ErroFilterChain;
 import br.com.codenation.aceleradev.comum.AmbienteEnum;
+import br.com.codenation.aceleradev.dto.ErroFilterDTO;
 import br.com.codenation.aceleradev.comum.LevelEnum;
 import br.com.codenation.aceleradev.domain.Erro;
 import br.com.codenation.aceleradev.service.ErroService;
+import br.com.codenation.aceleradev.service.impl.ErroServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,17 +16,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Objects;
+import java.util.List;
 
 @RestController
 @RequestMapping("/erro")
 public class ErroController {
 
-    private static ErroService erroService;
+    private final ErroService erroService;
 
     @Autowired
-    public ErroController(ErroService erroService) {
-        this.erroService = erroService;
+    public ErroController(ErroServiceImpl erroServiceImpl, List<ErroFilterChain> erroFilterChain) {
+        this.erroService = erroServiceImpl;
     }
 
     @GetMapping
@@ -56,17 +59,15 @@ public class ErroController {
     @GetMapping("/ambiente/{ambiente}")
     public ResponseEntity<Page<Erro>> findByTituloOrByLevelOrByUsuarioIdOrByAmbiente(@PageableDefault(sort = "titulo", direction = Sort.Direction.ASC, page = 0, size = 24) Pageable pageable,
                                                                                      @PathVariable AmbienteEnum ambiente,
-                                                                                     @RequestParam(required = false) String titulo,
-                                                                                     @RequestParam(required = false) LevelEnum level,
-                                                                                     @RequestParam(required = false) Long usuarioId) {
-        if (Objects.nonNull(titulo))
-            return ResponseEntity.ok(erroService.findByAmbienteAndTitulo(pageable, ambiente, titulo));
-        if(Objects.nonNull(level))
-            return ResponseEntity.ok(erroService.findByAmbienteAndLevel(pageable, ambiente, level));
-        if (Objects.nonNull(usuarioId))
-            return ResponseEntity.ok(erroService.findByAmbienteAndUsuarioId(pageable, ambiente, usuarioId));
+                                                                                     ErroFilterDTO erroFilter) {
 
-        return ResponseEntity.ok(erroService.findByAmbiente(pageable, ambiente));
+        return ResponseEntity.ok(erroService.findPaged(pageable, ambiente, erroFilter));
+
+//        return ResponseEntity.ok(titulo.map(erroService::findByAmbienteAndTitulo)
+//                .orElseGet(level.map(erroService::findByAmbienteAndLevel)
+//                        .orElseGet(usuarioId.map(erroService::findByAmbienteAndUsuarioId)
+//                                .orElseGet(erroService.findByAmbiente(pageable, ambiente)))));
+
     }
 
     @GetMapping("/titulo/{titulo}")

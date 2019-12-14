@@ -1,6 +1,8 @@
 package br.com.codenation.aceleradev.service.impl;
 
+import br.com.codenation.aceleradev.chain.impl.ErrorFilterTituloImpl;
 import br.com.codenation.aceleradev.comum.AmbienteEnum;
+import br.com.codenation.aceleradev.dto.ErroFilterDTO;
 import br.com.codenation.aceleradev.comum.LevelEnum;
 import br.com.codenation.aceleradev.domain.Erro;
 import br.com.codenation.aceleradev.exception.ResourceNotFoundException;
@@ -14,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ErroServiceImpl implements ErroService {
 
-    private static ErroRepository repository;
+    private final ErroRepository repository;
 
     @Autowired
     public ErroServiceImpl(ErroRepository repository) {
@@ -80,4 +82,10 @@ public class ErroServiceImpl implements ErroService {
     public Page<Erro> findByAmbienteAndUsuarioId(Pageable pageable, AmbienteEnum ambiente, Long usuarioId) {
         return repository.findByAmbienteAndUsuarioId(pageable, ambiente, usuarioId);
     }
+
+    @Override
+    public Page<Erro> findPaged(Pageable pageable, AmbienteEnum ambiente, ErroFilterDTO erroFilter) {
+        return new ErrorFilterTituloImpl().filtra(this, pageable, ambiente, erroFilter);
+    }
+
 }

@@ -4,6 +4,8 @@ INSERT INTO usuario (id, nome, token, senha, email) values (2222, 'usuario teste
 
 INSERT INTO usuario (id, nome, token, senha, email) values (3333, 'usuario teste 3', 'token de teste', '$2y$12$YZU2Hl/./XF88tSC0Q4Hxu/M2UAhPdXZ3rSt9rLz6EdzI16pdKByW', 'teste3@squad6.com.br');
 
+INSERT INTO usuario (id, nome, token, senha, email) values (4444, 'usuario teste 4', 'token de teste', 'teste', 'teste4@squad6.com.br');
+
 INSERT INTO erro (id, create_at, titulo, detalhes, usuario_id, level, ambiente, endereco, data, status) values (0101, now(), 'erro 1', 'detalhes do erro 1', 1111, 2, 0, '192.168.0.0', now(), 1);
 
 INSERT INTO erro (id, create_at, titulo, detalhes, usuario_id, level, ambiente, endereco, data, status) values (0202, now(), 'erro 2', 'detalhes do erro 2', 2222, 1, 1, '192.1.0.0', now(), 1);
