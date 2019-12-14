@@ -1,5 +1,6 @@
 package br.com.codenation.aceleradev.controller;
 
+import br.com.codenation.aceleradev.chain.ErroFilterChain;
 import br.com.codenation.aceleradev.comum.AmbienteEnum;
 import br.com.codenation.aceleradev.dto.ErroFilterDTO;
 import br.com.codenation.aceleradev.comum.LevelEnum;
