@@ -5,6 +5,7 @@ import br.com.codenation.aceleradev.comum.AmbienteEnum;
 import br.com.codenation.aceleradev.comum.LevelEnum;
 import br.com.codenation.aceleradev.comum.StatusEnum;
 import br.com.codenation.aceleradev.domain.Erro;
+import br.com.codenation.aceleradev.dto.ErroDTO;
 import br.com.codenation.aceleradev.dto.ErroFilterDTO;
 import br.com.codenation.aceleradev.service.ErroService;
 import br.com.codenation.aceleradev.service.impl.ErroServiceImpl;
@@ -31,8 +32,8 @@ public class ErroController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Erro>> findAll(@PageableDefault(sort = "id", direction = Sort.Direction.ASC, page = 0, size = 24) Pageable pageable) {
-        return ResponseEntity.ok(erroService.findAll(pageable));
+    public ResponseEntity<Page<ErroDTO>> findAll(@PageableDefault(sort = "data", direction = Sort.Direction.DESC, page = 0, size = 8) Pageable pageable) {
+        return ResponseEntity.ok(erroService.findAllErroDTO(pageable));
     }
 
     @GetMapping("/{id}")
@@ -58,7 +59,7 @@ public class ErroController {
     }
 
     @GetMapping("/ambiente/{ambiente}")
-    public ResponseEntity<Page<Erro>> findByTituloOrByLevelOrByUsuarioIdOrByAmbiente(@PageableDefault(sort = "titulo", direction = Sort.Direction.ASC, page = 0, size = 24) Pageable pageable,
+    public ResponseEntity<Page<Erro>> findByTituloOrByLevelOrByUsuarioIdOrByAmbiente(@PageableDefault(sort = "data", direction = Sort.Direction.DESC, page = 0, size = 8) Pageable pageable,
                                                                                      @PathVariable AmbienteEnum ambiente,
                                                                                      ErroFilterDTO erroFilter) {
 
@@ -66,20 +67,20 @@ public class ErroController {
     }
 
     @GetMapping("/titulo/{titulo}")
-    public ResponseEntity<Page<Erro>> findByTitulo(@PageableDefault(sort = "titulo", direction = Sort.Direction.ASC, page = 0, size = 24) Pageable pageable,
+    public ResponseEntity<Page<Erro>> findByTitulo(@PageableDefault(sort = "titulo", direction = Sort.Direction.ASC, page = 0, size = 8) Pageable pageable,
                                                    @PathVariable String titulo) {
 
         return ResponseEntity.ok(erroService.findByTitulo(pageable, titulo));
     }
 
     @GetMapping("/level/{level}")
-    public ResponseEntity<Page<Erro>> findByLevel(@PageableDefault(sort = "titulo", direction = Sort.Direction.ASC, page = 0, size = 24) Pageable pageable,
+    public ResponseEntity<Page<Erro>> findByLevel(@PageableDefault(sort = "titulo", direction = Sort.Direction.ASC, page = 0, size = 8) Pageable pageable,
                                                   @PathVariable LevelEnum level) {
         return ResponseEntity.ok(erroService.findByLevel(pageable, level));
     }
 
     @GetMapping("/usuarioId/{usuarioId}")
-    public ResponseEntity<Page<Erro>> findByUsuarioId(@PageableDefault(sort = "titulo", direction = Sort.Direction.ASC, page = 0, size = 24) Pageable pageable,
+    public ResponseEntity<Page<Erro>> findByUsuarioId(@PageableDefault(sort = "titulo", direction = Sort.Direction.ASC, page = 0, size = 8) Pageable pageable,
                                                       @PathVariable Long usuarioId) {
         return ResponseEntity.ok(erroService.findByUsuarioId(pageable, usuarioId));
     }

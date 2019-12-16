@@ -24,7 +24,6 @@ public class Erro extends BaseEntity{
     @Size(min = 10, max = 250)
     private String titulo;
 
-    @Lob
     @Column(name = "detalhes", nullable = false)
     private String detalhes;
 

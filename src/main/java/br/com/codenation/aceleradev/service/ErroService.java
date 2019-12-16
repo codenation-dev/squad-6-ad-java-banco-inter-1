@@ -1,6 +1,7 @@
 package br.com.codenation.aceleradev.service;
 
 import br.com.codenation.aceleradev.comum.AmbienteEnum;
+import br.com.codenation.aceleradev.dto.ErroDTO;
 import br.com.codenation.aceleradev.dto.ErroFilterDTO;
 import br.com.codenation.aceleradev.comum.LevelEnum;
 import br.com.codenation.aceleradev.domain.Erro;
@@ -12,7 +13,7 @@ public interface ErroService {
     void update(Long id, Erro erro);
     void delete(Long id);
     Erro findById(Long id);
-    Page<Erro> findAll(Pageable pageable);
+    Page<ErroDTO> findAllErroDTO(Pageable pageable);
     Page<Erro> findByTitulo(Pageable pageable, String titulo);
     Page<Erro> findByLevel(Pageable pageable, LevelEnum level);
     Page<Erro> findByUsuarioId(Pageable pageable, Long usuarioId);

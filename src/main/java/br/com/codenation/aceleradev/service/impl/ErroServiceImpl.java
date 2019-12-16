@@ -2,6 +2,7 @@ package br.com.codenation.aceleradev.service.impl;
 
 import br.com.codenation.aceleradev.chain.impl.ErrorFilterTituloImpl;
 import br.com.codenation.aceleradev.comum.AmbienteEnum;
+import br.com.codenation.aceleradev.dto.ErroDTO;
 import br.com.codenation.aceleradev.dto.ErroFilterDTO;
 import br.com.codenation.aceleradev.comum.LevelEnum;
 import br.com.codenation.aceleradev.domain.Erro;
@@ -44,8 +45,8 @@ public class ErroServiceImpl implements ErroService {
     }
 
     @Override
-    public Page<Erro> findAll(Pageable pageable){
-        return repository.findAll(pageable);
+    public Page<ErroDTO> findAllErroDTO(Pageable pageable){
+        return repository.findAllErroDTO(pageable);
     }
 
     @Override
