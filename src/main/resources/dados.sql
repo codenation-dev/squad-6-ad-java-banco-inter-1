@@ -1,8 +1,8 @@
-INSERT INTO usuario (id, nome, token, senha, email) values (1111, 'Raul F. Mansur', 'hzqfm123zmufgo1mb51', '$2y$12$YZU2Hl/./XF88tSC0Q4Hxu/M2UAhPdXZ3rSt9rLz6EdzI16pdKByW', 'teste1@squad6.com.br');
+INSERT INTO usuario (id, nome, token, senha, email, role) values (1111, 'Raul F. Mansur', 'hzqfm123zmufgo1mb51', '$2y$12$YZU2Hl/./XF88tSC0Q4Hxu/M2UAhPdXZ3rSt9rLz6EdzI16pdKByW', 'teste1@squad6.com.br', 1);
 
-INSERT INTO usuario (id, nome, token, senha, email) values (2222, 'usuario teste 2', 'token de teste', '$2y$12$YZU2Hl/./XF88tSC0Q4Hxu/M2UAhPdXZ3rSt9rLz6EdzI16pdKByW', 'teste2@squad6.com.br');
+INSERT INTO usuario (id, nome, token, senha, email, role) values (2222, 'usuario teste 2', 'token de teste', '$2y$12$YZU2Hl/./XF88tSC0Q4Hxu/M2UAhPdXZ3rSt9rLz6EdzI16pdKByW', 'teste2@squad6.com.br', 0);
 
-INSERT INTO usuario (id, nome, token, senha, email) values (3333, 'usuario teste 3', 'token de teste', '$2y$12$YZU2Hl/./XF88tSC0Q4Hxu/M2UAhPdXZ3rSt9rLz6EdzI16pdKByW', 'teste3@squad6.com.br');
+INSERT INTO usuario (id, nome, token, senha, email, role) values (3333, 'usuario teste 3', 'token de teste', '$2y$12$YZU2Hl/./XF88tSC0Q4Hxu/M2UAhPdXZ3rSt9rLz6EdzI16pdKByW', 'teste3@squad6.com.br', 0);
 
 INSERT INTO erro (id, create_at, titulo, detalhes, usuario_id, level, ambiente, endereco, data, status) values (0101, now(), 'titulo do erro 1', 'detalhes do erro 1', 1111, 2, 0, '192.168.0.0', now(), 0);
 
