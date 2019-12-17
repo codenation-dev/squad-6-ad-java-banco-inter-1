@@ -4,6 +4,7 @@ import br.com.codenation.aceleradev.comum.AmbienteEnum;
 import br.com.codenation.aceleradev.comum.LevelEnum;
 import br.com.codenation.aceleradev.comum.StatusEnum;
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -25,6 +26,7 @@ public class Erro extends BaseEntity{
     private String titulo;
 
     @Lob
+    @Type(type = "org.hibernate.type.TextType")
     @Column(name = "detalhes", nullable = false)
     private String detalhes;
 
