@@ -2,6 +2,7 @@ package br.com.codenation.aceleradev.domain;
 
 import br.com.codenation.aceleradev.comum.LevelEnum;
 import br.com.codenation.aceleradev.comum.RoleEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -36,4 +37,9 @@ public class Usuario extends BaseEntity {
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "role", nullable = false)
     private RoleEnum role;
+
+    @JsonIgnore
+    public String getSenha(){
+        return this.senha;
+    }
 }
