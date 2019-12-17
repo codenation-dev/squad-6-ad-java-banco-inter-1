@@ -13,24 +13,24 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ErroRepository extends JpaRepository<Erro, Long>{
-    @Query(value = " SELECT erro1.id AS id," +
-            " erro1.create_at AS createdAt," +
-            " erro1.ambiente AS ambiente," +
-            " erro1.data AS data," +
-            " erro1.detalhes AS detalhes," +
-            " erro1.endereco AS endereco," +
-            " erro1.level AS level," +
-            " erro1.status AS status," +
-            " erro1.titulo AS titulo," +
-            " erro1.usuario_id AS usuarioId," +
-            " frequencia FROM ERRO erro1" +
-            " INNER JOIN (SELECT COUNT(e.id) AS frequencia, e.titulo FROM ERRO e GROUP BY e.titulo) erro2" +
-            " ON erro1.titulo = erro2.titulo"
-            , nativeQuery = true)
-    Page<ErroDTO> findAllErroDTO(Pageable pageable);
-
+public interface ErroRepository extends JpaRepository<Erro, Long> {
     Page<Erro> findByTitulo(Pageable pageable, String titulo);
+
+    @Query(value = "SELECT new br.com.codenation.aceleradev.dto.ErroDTO(" +
+            " erro1.id," +
+            " erro1.createAt," +
+            " erro1.ambiente," +
+            " erro1.data," +
+            " erro1.detalhes," +
+            " erro1.endereco," +
+            " erro1.level," +
+            " erro1.status," +
+            " erro1.titulo," +
+            " erro1.usuario.id," +
+            " count(erro2.id))  " +
+            "FROM Erro erro1 JOIN Erro erro2 ON erro1.titulo = erro2.titulo" +
+            " GROUP BY erro1.id")
+    Page<ErroDTO> findAllErroDTO(Pageable pageable);
 
     Page<Erro> findByLevel(Pageable pageable, LevelEnum level);
 

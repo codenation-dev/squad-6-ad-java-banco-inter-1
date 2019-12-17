@@ -5,19 +5,21 @@ import br.com.codenation.aceleradev.comum.LevelEnum;
 import br.com.codenation.aceleradev.comum.StatusEnum;
 import lombok.*;
 
-import javax.persistence.Entity;
 import java.time.LocalDateTime;
 
-public interface ErroDTO {
-    Long getId();
-    LocalDateTime getCreatedAt();
-    AmbienteEnum getAmbiente();
-    LocalDateTime getData();
-    String getDetalhes();
-    String getEndereco();
-    LevelEnum getLevel();
-    StatusEnum getStatus();
-    String getTitulo();
-    Long getUsuarioId();
-    Long getFrequencia();
+@AllArgsConstructor
+@Getter
+@Setter
+public class ErroDTO {
+    private Long id;
+    private LocalDateTime createdAt;
+    private AmbienteEnum ambiente;
+    private LocalDateTime data;
+    private String detalhes;
+    private String endereco;
+    private LevelEnum level;
+    private StatusEnum status;
+    private String titulo;
+    private Long usuarioId;
+    private Long frequencia;
 }
