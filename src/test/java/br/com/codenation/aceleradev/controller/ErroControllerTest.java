@@ -3,14 +3,18 @@ package br.com.codenation.aceleradev.controller;
 import br.com.codenation.aceleradev.AbstractTest;
 import br.com.codenation.aceleradev.comum.AmbienteEnum;
 import br.com.codenation.aceleradev.comum.LevelEnum;
+import br.com.codenation.aceleradev.comum.RoleEnum;
 import br.com.codenation.aceleradev.comum.StatusEnum;
 import br.com.codenation.aceleradev.domain.Erro;
 import br.com.codenation.aceleradev.domain.Usuario;
+import br.com.codenation.aceleradev.service.ErroService;
+import br.com.codenation.aceleradev.service.UsuarioService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
@@ -24,6 +28,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -32,21 +37,37 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ErroControllerTest extends AbstractTest {
 
+    @Value("${security.oauth2.client.client-id}")
+    private String clientId;
+
+    @Value("${security.oauth2.client.client-secret}")
+    private String secret;
+
     private MockMvc mvc;
 
     @Autowired
     private WebApplicationContext webApplicationContext;
 
+    @Autowired
+    private ErroService erroService;
+
+    @Autowired
+    private UsuarioService usuarioService;
+
     private Erro erro;
+    private Usuario usuario;
 
     @Before
     public void setUp(){
         mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-        Usuario usuario = new Usuario();
+        usuario = new Usuario();
         usuario.setEmail("teste_controller_user@squad6.com.br");
         usuario.setNome("Teste controller user");
         usuario.setSenha(new BCryptPasswordEncoder().encode("senhateste"));
         usuario.setToken("batatauser");
+        usuario.setRole(RoleEnum.ADMIN);
+
+        usuarioService.salvar(usuario);
 
         erro = new Erro();
         erro.setStatus(StatusEnum.ATIVO);
@@ -57,6 +78,9 @@ public class ErroControllerTest extends AbstractTest {
         erro.setTitulo("Erro de teste");
         erro.setDetalhes("Detalhes de teste");
         erro.setUsuario(usuario);
+
+        erroService.save(erro);
+
     }
 
     @Test

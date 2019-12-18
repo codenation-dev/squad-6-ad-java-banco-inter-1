@@ -2,14 +2,21 @@ package br.com.codenation.aceleradev.controller;
 
 
 import br.com.codenation.aceleradev.AbstractTest;
+import br.com.codenation.aceleradev.comum.AmbienteEnum;
+import br.com.codenation.aceleradev.comum.LevelEnum;
+import br.com.codenation.aceleradev.comum.RoleEnum;
+import br.com.codenation.aceleradev.comum.StatusEnum;
+import br.com.codenation.aceleradev.domain.Erro;
 import br.com.codenation.aceleradev.domain.Usuario;
 import br.com.codenation.aceleradev.repository.UsuarioRepository;
+import br.com.codenation.aceleradev.service.UsuarioService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.MediaType;
@@ -34,6 +41,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UsuarioControllerTest extends AbstractTest {
+    @Value("${security.oauth2.client.client-id}")
+    private String clientId;
+
+    @Value("${security.oauth2.client.client-secret}")
+    private String secret;
 
     private MockMvc mvc;
 
@@ -41,7 +53,7 @@ public class UsuarioControllerTest extends AbstractTest {
     private WebApplicationContext webApplicationContext;
 
     @Autowired
-    UsuarioRepository usuarioRepository;
+    UsuarioService usuarioService;
 
     private Usuario usuario;
 
@@ -53,6 +65,9 @@ public class UsuarioControllerTest extends AbstractTest {
         usuario.setNome("Teste controller user");
         usuario.setSenha(new BCryptPasswordEncoder().encode("senhateste"));
         usuario.setToken("batatauser");
+        usuario.setRole(RoleEnum.ADMIN);
+
+        usuarioService.salvar(usuario);
     }
 
     @Test
