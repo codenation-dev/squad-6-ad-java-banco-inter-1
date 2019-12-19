@@ -1,6 +1,7 @@
 package br.com.codenation.aceleradev.controller;
 
 import br.com.codenation.aceleradev.domain.Usuario;
+import br.com.codenation.aceleradev.dto.UsuarioDTO;
 import br.com.codenation.aceleradev.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,12 +20,12 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> findById(@PathVariable Long id) {
+    public ResponseEntity<UsuarioDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok(usuarioService.findById(id));
     }
 
     @GetMapping("/email/{email}")
-    public ResponseEntity<Usuario> findByEmail(@PathVariable String email) {
+    public ResponseEntity<UsuarioDTO> findByEmail(@PathVariable String email) {
         return ResponseEntity.ok(usuarioService.findByEmail(email));
     }
 

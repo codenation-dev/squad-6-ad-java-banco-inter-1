@@ -1,6 +1,7 @@
 package br.com.codenation.aceleradev.service.impl;
 
 import br.com.codenation.aceleradev.domain.Usuario;
+import br.com.codenation.aceleradev.dto.UsuarioDTO;
 import br.com.codenation.aceleradev.exception.ResourceNotFoundException;
 import br.com.codenation.aceleradev.repository.UsuarioRepository;
 import br.com.codenation.aceleradev.service.UsuarioService;
@@ -21,13 +22,13 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Usuario findById(Long id) {
-        return usuarioRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado"));
+    public UsuarioDTO findById(Long id) {
+        return usuarioRepository.getById(id).orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado"));
     }
 
     @Override
-    public Usuario findByEmail(String email) {
-        return usuarioRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado"));
+    public UsuarioDTO findByEmail(String email) {
+        return usuarioRepository.getByEmail(email).orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado"));
     }
 
     @Override
