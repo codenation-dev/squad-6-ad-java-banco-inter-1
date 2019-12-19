@@ -21,5 +21,6 @@ public class ErroDTO {
     private StatusEnum status;
     private String titulo;
     private Long usuarioId;
+    private String token;
     private Long frequencia;
 }

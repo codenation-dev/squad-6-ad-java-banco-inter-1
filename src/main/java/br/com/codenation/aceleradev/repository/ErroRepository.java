@@ -27,8 +27,10 @@ public interface ErroRepository extends JpaRepository<Erro, Long> {
             " erro1.status," +
             " erro1.titulo," +
             " erro1.usuario.id," +
+            " u.token," +
             " count(erro2.id))  " +
-            "FROM Erro erro1 JOIN Erro erro2 ON erro1.titulo = erro2.titulo" +
+            " FROM Erro erro1 JOIN Erro erro2 ON erro1.titulo = erro2.titulo" +
+            " INNER JOIN Usuario u ON u.id = erro1.usuario.id" +
             " GROUP BY erro1.id")
     Page<ErroDTO> findAllErroDTO(Pageable pageable);
 
