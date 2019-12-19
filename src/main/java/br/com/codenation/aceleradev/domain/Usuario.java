@@ -37,9 +37,4 @@ public class Usuario extends BaseEntity {
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "role", nullable = false)
     private RoleEnum role;
-
-    @JsonIgnore
-    public String getSenha(){
-        return this.senha;
-    }
 }
