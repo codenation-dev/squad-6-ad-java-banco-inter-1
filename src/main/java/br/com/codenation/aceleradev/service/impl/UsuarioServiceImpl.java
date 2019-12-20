@@ -5,6 +5,7 @@ import br.com.codenation.aceleradev.dto.UsuarioDTO;
 import br.com.codenation.aceleradev.exception.ResourceNotFoundException;
 import br.com.codenation.aceleradev.repository.UsuarioRepository;
 import br.com.codenation.aceleradev.service.UsuarioService;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     public void salvar(Usuario usuario) {
         Usuario usuarioComSenhaEncriptografada = usuario;
         usuarioComSenhaEncriptografada.setSenha(passwordEncoder.encode(usuario.getSenha()));
+        usuarioComSenhaEncriptografada.setToken(criarToken(usuario.toString()));
         System.out.println(usuarioComSenhaEncriptografada.getSenha());
         usuarioRepository.save(usuarioComSenhaEncriptografada);
     }
@@ -42,6 +44,10 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public void update(Long id, Usuario usuario) {
         usuarioRepository.save(usuario);
+    }
+
+    public String criarToken(String conteudo){
+        return DigestUtils.sha1Hex(conteudo);
     }
 
 }

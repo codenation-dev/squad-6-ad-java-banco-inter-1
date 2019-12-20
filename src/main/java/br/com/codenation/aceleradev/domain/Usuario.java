@@ -17,6 +17,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @Builder
+@ToString
 public class Usuario extends BaseEntity {
 
     @Column(name = "nome", length = 150, nullable = false)
