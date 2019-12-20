@@ -2,6 +2,7 @@ package br.com.codenation.aceleradev.service.impl;
 
 import br.com.codenation.aceleradev.chain.impl.ErrorFilterTituloImpl;
 import br.com.codenation.aceleradev.comum.AmbienteEnum;
+import br.com.codenation.aceleradev.comum.StatusEnum;
 import br.com.codenation.aceleradev.dto.ErroDTO;
 import br.com.codenation.aceleradev.dto.ErroFilterDTO;
 import br.com.codenation.aceleradev.comum.LevelEnum;
@@ -45,8 +46,8 @@ public class ErroServiceImpl implements ErroService {
     }
 
     @Override
-    public Page<ErroDTO> findAllErroDTO(Pageable pageable){
-        return repository.findAllErroDTO(pageable);
+    public Page<ErroDTO> findAllErroDTO(Pageable pageable, StatusEnum status){
+        return repository.findAllErroDTO(pageable, status);
     }
 
     @Override
@@ -65,8 +66,8 @@ public class ErroServiceImpl implements ErroService {
     }
 
     @Override
-    public Page<Erro> findByAmbiente(Pageable pageable, AmbienteEnum ambiente) {
-        return repository.findByAmbiente(pageable, ambiente);
+    public Page<Erro> findByAmbiente(Pageable pageable, AmbienteEnum ambiente, StatusEnum status) {
+        return repository.findByAmbiente(pageable, ambiente, status);
     }
 
     @Override
@@ -85,8 +86,8 @@ public class ErroServiceImpl implements ErroService {
     }
 
     @Override
-    public Page<Erro> findPaged(Pageable pageable, AmbienteEnum ambiente, ErroFilterDTO erroFilter) {
-        return new ErrorFilterTituloImpl().filtra(this, pageable, ambiente, erroFilter);
+    public Page<Erro> findPaged(Pageable pageable, AmbienteEnum ambiente, StatusEnum status, ErroFilterDTO erroFilter) {
+        return new ErrorFilterTituloImpl().filtra(this, pageable, ambiente, status, erroFilter);
     }
 
 

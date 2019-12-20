@@ -32,8 +32,9 @@ public class ErroController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ErroDTO>> findAll(@PageableDefault(sort = "data", direction = Sort.Direction.DESC, page = 0, size = 8) Pageable pageable) {
-        return ResponseEntity.ok(erroService.findAllErroDTO(pageable));
+    public ResponseEntity<Page<ErroDTO>> findAll(@PageableDefault(sort = "data", direction = Sort.Direction.DESC, page = 0, size = 8) Pageable pageable,
+                                                 @RequestParam(value = "status", required = true) StatusEnum status) {
+        return ResponseEntity.ok(erroService.findAllErroDTO(pageable, status));
     }
 
     @GetMapping("/{id}")
@@ -61,9 +62,10 @@ public class ErroController {
     @GetMapping("/ambiente/{ambiente}")
     public ResponseEntity<Page<Erro>> findByTituloOrByLevelOrByUsuarioIdOrByAmbiente(@PageableDefault(sort = "data", direction = Sort.Direction.DESC, page = 0, size = 8) Pageable pageable,
                                                                                      @PathVariable AmbienteEnum ambiente,
+                                                                                     @RequestParam(value = "status", required = true) StatusEnum status,
                                                                                      ErroFilterDTO erroFilter) {
 
-        return ResponseEntity.ok(erroService.findPaged(pageable, ambiente, erroFilter));
+        return ResponseEntity.ok(erroService.findPaged(pageable, ambiente, status, erroFilter));
     }
 
     @GetMapping("/titulo/{titulo}")
@@ -87,7 +89,7 @@ public class ErroController {
 
     @PutMapping("/updateStatus/{statusCode}")
     public ResponseEntity<Void> updateStatus(@RequestBody List<Long> listaIds, @PathVariable StatusEnum statusCode) {
-        for(Long id: listaIds){
+        for (Long id : listaIds) {
             Erro erro = erroService.findById(id);
             erro.setStatus(statusCode);
             erroService.update(id, erro);

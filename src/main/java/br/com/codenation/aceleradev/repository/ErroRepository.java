@@ -2,6 +2,7 @@ package br.com.codenation.aceleradev.repository;
 
 import br.com.codenation.aceleradev.comum.AmbienteEnum;
 import br.com.codenation.aceleradev.comum.LevelEnum;
+import br.com.codenation.aceleradev.comum.StatusEnum;
 import br.com.codenation.aceleradev.domain.Erro;
 import br.com.codenation.aceleradev.dto.ErroDTO;
 import org.springframework.data.domain.Page;
@@ -30,10 +31,10 @@ public interface ErroRepository extends JpaRepository<Erro, Long> {
             " erro1.usuario.id," +
             " u.token," +
             " count(erro2.id)) " +
-            " FROM Erro erro1 JOIN Erro erro2 ON erro1.titulo = erro2.titulo" +
+            " FROM Erro erro1 JOIN Erro erro2 ON erro1.titulo = erro2.titulo AND erro1.status = :status" +
             " INNER JOIN Usuario u ON u.id = erro1.usuario.id" +
             " GROUP BY erro1.id, u.token")
-    Page<ErroDTO> findAllErroDTO(Pageable pageable);
+    Page<ErroDTO> findAllErroDTO(Pageable pageable, @Param("status") StatusEnum status);
 
     Page<Erro> findByLevel(Pageable pageable, LevelEnum level);
 
@@ -52,10 +53,10 @@ public interface ErroRepository extends JpaRepository<Erro, Long> {
             " erro1.usuario.id," +
             " u.token," +
             " count(erro2.id)) " +
-            " FROM Erro erro1 JOIN Erro erro2 ON erro1.titulo = erro2.titulo AND erro2.ambiente = :ambiente" +
+            " FROM Erro erro1 JOIN Erro erro2 ON erro1.titulo = erro2.titulo AND erro2.ambiente = :ambiente AND erro2.status = :status " +
             " INNER JOIN Usuario u ON u.id = erro1.usuario.id" +
             " GROUP BY erro1.id, u.token")
-    Page<Erro> findByAmbiente(Pageable pageable, @Param("ambiente") AmbienteEnum ambienteEnum);
+    Page<Erro> findByAmbiente(Pageable pageable, @Param("ambiente") AmbienteEnum ambienteEnum, @Param("status") StatusEnum status);
 
     Page<Erro> findByAmbienteAndTitulo(Pageable pageable, AmbienteEnum ambiente, String titulo);
 
