@@ -1,5 +1,6 @@
 package br.com.codenation.aceleradev.service.impl;
 
+import br.com.codenation.aceleradev.comum.RoleEnum;
 import br.com.codenation.aceleradev.domain.Usuario;
 import br.com.codenation.aceleradev.dto.UsuarioDTO;
 import br.com.codenation.aceleradev.exception.ResourceNotFoundException;
@@ -9,6 +10,8 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -37,6 +40,11 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario usuarioComSenhaEncriptografada = usuario;
         usuarioComSenhaEncriptografada.setSenha(passwordEncoder.encode(usuario.getSenha()));
         usuarioComSenhaEncriptografada.setToken(criarToken(usuario.toString()));
+
+        if(Objects.isNull(usuario.getRole())){
+            usuarioComSenhaEncriptografada.setRole(RoleEnum.USER);
+        }
+
         System.out.println(usuarioComSenhaEncriptografada.getSenha());
         usuarioRepository.save(usuarioComSenhaEncriptografada);
     }
