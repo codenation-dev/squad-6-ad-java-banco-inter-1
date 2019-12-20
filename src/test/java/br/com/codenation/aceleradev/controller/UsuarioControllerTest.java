@@ -2,15 +2,9 @@ package br.com.codenation.aceleradev.controller;
 
 
 import br.com.codenation.aceleradev.AbstractTest;
-import br.com.codenation.aceleradev.comum.AmbienteEnum;
-import br.com.codenation.aceleradev.comum.LevelEnum;
 import br.com.codenation.aceleradev.comum.RoleEnum;
-import br.com.codenation.aceleradev.comum.StatusEnum;
-import br.com.codenation.aceleradev.domain.Erro;
 import br.com.codenation.aceleradev.domain.Usuario;
-import br.com.codenation.aceleradev.repository.UsuarioRepository;
 import br.com.codenation.aceleradev.service.UsuarioService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,23 +12,14 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

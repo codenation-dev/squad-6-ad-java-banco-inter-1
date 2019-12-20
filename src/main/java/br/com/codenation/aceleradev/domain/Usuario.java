@@ -1,8 +1,6 @@
 package br.com.codenation.aceleradev.domain;
 
-import br.com.codenation.aceleradev.comum.LevelEnum;
 import br.com.codenation.aceleradev.comum.RoleEnum;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
