@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
-@PropertySource("classpath:application-h2.properties")
+@PropertySource("classpath:application-postgres.properties")
 public class CentralErrosApplication {
 
 	public static void main(String[] args) {
