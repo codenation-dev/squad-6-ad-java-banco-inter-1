@@ -64,7 +64,6 @@ public class ErroControllerTest extends AbstractTest {
         usuario.setEmail("teste_controller_user@squad6.com.br");
         usuario.setNome("Teste controller user");
         usuario.setSenha(new BCryptPasswordEncoder().encode("senhateste"));
-        usuario.setToken("batatauser");
         usuario.setRole(RoleEnum.ADMIN);
 
         usuarioService.salvar(usuario);
