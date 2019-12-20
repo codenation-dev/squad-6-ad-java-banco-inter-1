@@ -44,8 +44,6 @@ public class UsuarioServiceImpl implements UsuarioService {
         if(Objects.isNull(usuario.getRole())){
             usuarioComSenhaEncriptografada.setRole(RoleEnum.USER);
         }
-
-        System.out.println(usuarioComSenhaEncriptografada.getSenha());
         usuarioRepository.save(usuarioComSenhaEncriptografada);
     }
 
