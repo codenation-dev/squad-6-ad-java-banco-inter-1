@@ -1,5 +1,6 @@
 package br.com.codenation.aceleradev.repository;
 
+import br.com.codenation.aceleradev.comum.RoleEnum;
 import br.com.codenation.aceleradev.domain.Usuario;
 import org.junit.After;
 import org.junit.Before;
@@ -28,6 +29,7 @@ public class UsuarioRepositoryTest {
         usuario.setNome("Teste repository");
         usuario.setSenha(new BCryptPasswordEncoder().encode("senhateste"));
         usuario.setToken("batata");
+        usuario.setRole(RoleEnum.ADMIN);
         usuarioRepository.save(usuario);
     }
 

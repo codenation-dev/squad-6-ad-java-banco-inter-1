@@ -82,6 +82,7 @@ public class ErroControllerTest extends AbstractTest {
     @Test
     public void testAcessoEndpointErro() throws Exception {
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get("/erro/")
+                .param("status", "ATIVO")
                 .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
         int status = mvcResult.getResponse().getStatus();
         assertEquals(200, status);

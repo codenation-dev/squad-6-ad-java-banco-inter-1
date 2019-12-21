@@ -4,6 +4,7 @@ package br.com.codenation.aceleradev.controller;
 import br.com.codenation.aceleradev.AbstractTest;
 import br.com.codenation.aceleradev.comum.RoleEnum;
 import br.com.codenation.aceleradev.domain.Usuario;
+import br.com.codenation.aceleradev.dto.UsuarioDTO;
 import br.com.codenation.aceleradev.service.UsuarioService;
 import org.junit.After;
 import org.junit.Before;
@@ -64,7 +65,11 @@ public class UsuarioControllerTest extends AbstractTest {
 
    @Test
    public void testCriarUsuarioViaPost() throws Exception {
-        String jsonUsuario = mapToJson(usuario);
+       String jsonUsuario = "{\"id\":1111," +
+               "\"nome\":\"Raul F. Mansur\"," +
+               "\"token\":\"hzqfm123zmufgo1mb51\"," +
+               "\"senha\":\"$2y$12$YZU2Hl/./XF88tSC0Q4Hxu/M2UAhPdXZ3rSt9rLz6EdzI16pdKByW\"," +
+               "\"email\":\"teste1@squad6.com.br\"}";
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post("/usuario")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
@@ -76,19 +81,13 @@ public class UsuarioControllerTest extends AbstractTest {
     @Test
     public void testRecuperarUsuarioViaGet() throws Exception {
 
-        String jsonUsuario = "{\"id\":1111," +
-                "\"createAt\":null," +
-                "\"nome\":\"Raul F. Mansur\"," +
-                "\"token\":\"hzqfm123zmufgo1mb51\"," +
-                "\"senha\":\"$2y$12$YZU2Hl/./XF88tSC0Q4Hxu/M2UAhPdXZ3rSt9rLz6EdzI16pdKByW\"," +
-                "\"email\":\"teste1@squad6.com.br\"}";
-
-        Usuario usuario = mapFromJson(jsonUsuario, Usuario.class);
+        UsuarioDTO usuarioDTO = new UsuarioDTO(1111l, "Raul F. Mansur", "hzqfm123zmufgo1mb51",
+                "teste1@squad6.com.br", RoleEnum.ADMIN);
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get("/usuario/1111")
                 .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
         String resultado = mvcResult.getResponse().getContentAsString();
 
-        assertEquals(usuario, mapFromJson(resultado, Usuario.class));
+        assertEquals(mapToJson(usuarioDTO), resultado);
     }
 
 

@@ -2,6 +2,7 @@ package br.com.codenation.aceleradev.repository;
 
 import br.com.codenation.aceleradev.comum.AmbienteEnum;
 import br.com.codenation.aceleradev.comum.LevelEnum;
+import br.com.codenation.aceleradev.comum.RoleEnum;
 import br.com.codenation.aceleradev.comum.StatusEnum;
 import br.com.codenation.aceleradev.domain.Erro;
 import br.com.codenation.aceleradev.domain.Usuario;
@@ -42,6 +43,7 @@ public class ErroRepositoryTest {
         usuario.setNome("Teste repository");
         usuario.setSenha(new BCryptPasswordEncoder().encode("senhateste"));
         usuario.setToken("batata");
+        usuario.setRole(RoleEnum.ADMIN);
         usuarioRepository.save(usuario);
 
         erro = new Erro();
