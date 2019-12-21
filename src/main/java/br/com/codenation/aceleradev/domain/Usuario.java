@@ -1,6 +1,7 @@
 package br.com.codenation.aceleradev.domain;
 
 import br.com.codenation.aceleradev.comum.RoleEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ public class Usuario extends BaseEntity {
     private String token;
 
     @Column(name="senha")
+    @JsonIgnore
     private String senha;
 
     @Column(name="email", length = 150)
