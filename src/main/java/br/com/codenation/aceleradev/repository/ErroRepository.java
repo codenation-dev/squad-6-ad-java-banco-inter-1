@@ -30,7 +30,7 @@ public interface ErroRepository extends JpaRepository<Erro, Long> {
             " erro1.titulo," +
             " erro1.usuario.id," +
             " u.token," +
-            " count(erro2.id)) " +
+            " count(erro2.id) as frequencia) " +
             " FROM Erro erro1 JOIN Erro erro2 ON erro1.titulo = erro2.titulo AND erro1.status = :status" +
             " INNER JOIN Usuario u ON u.id = erro1.usuario.id" +
             " GROUP BY erro1.id, u.token")

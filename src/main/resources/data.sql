@@ -10,8 +10,8 @@ INSERT INTO erro (id, create_at, titulo, detalhes, usuario_id, level, ambiente, 
 
 INSERT INTO erro (id, create_at, titulo, detalhes, usuario_id, level, ambiente, endereco, data, status) values (0303, now(), 'titulo do erro 3', 'detalhes do erro 3', 2222, 1, 0, '10.0.0.1', now(), 0);
 
-INSERT INTO erro (id, create_at, titulo, detalhes, usuario_id, level, ambiente, endereco, data, status) values (0404, now(), 'titulo do erro 4', 'detalhes do erro 4', 3333, 2, 1, '192.168.0.0', now(), 0);
+INSERT INTO erro (id, create_at, titulo, detalhes, usuario_id, level, ambiente, endereco, data, status) values (0404, now(), 'titulo do erro 1', 'detalhes do erro 4', 3333, 2, 1, '192.168.0.0', now(), 0);
 
-INSERT INTO erro (id, create_at, titulo, detalhes, usuario_id, level, ambiente, endereco, data, status) values (0505, now(), 'titulo do erro 5', 'detalhes do erro 5', 1111, 3, 1, '1.1.0.0', now(), 0);
+INSERT INTO erro (id, create_at, titulo, detalhes, usuario_id, level, ambiente, endereco, data, status) values (0505, now(), 'titulo do erro 1', 'detalhes do erro 5', 1111, 3, 1, '1.1.0.0', now(), 0);
 
-INSERT INTO erro (id, create_at, titulo, detalhes, usuario_id, level, ambiente, endereco, data, status) values (0606, now(), 'titulo do erro 6', 'detalhes do erro 6', 3333, 2, 2, '10.0.0.1', now(), 0);
+INSERT INTO erro (id, create_at, titulo, detalhes, usuario_id, level, ambiente, endereco, data, status) values (0606, now(), 'titulo do erro 2', 'detalhes do erro 6', 3333, 2, 2, '10.0.0.1', now(), 0);
