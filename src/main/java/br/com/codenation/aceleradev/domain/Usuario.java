@@ -12,6 +12,7 @@ import javax.validation.constraints.Size;
 @Table(name = "usuario")
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 @Getter
 @Setter
 @Builder
